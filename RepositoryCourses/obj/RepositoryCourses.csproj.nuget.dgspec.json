@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\C#\\RepositoryPattern\\C# Program\\RepositoryCourses\\RepositoryCourses.csproj": {}
+    "D:\\C#\\Week3\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj": {}
   },
   "projects": {
-    "E:\\C#\\RepositoryPattern\\C# Program\\RepositoryCourses\\RepositoryCourses.csproj": {
+    "D:\\C#\\Week3\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\C#\\RepositoryPattern\\C# Program\\RepositoryCourses\\RepositoryCourses.csproj",
+        "projectUniqueName": "D:\\C#\\Week3\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj",
         "projectName": "RepositoryCourses",
-        "projectPath": "E:\\C#\\RepositoryPattern\\C# Program\\RepositoryCourses\\RepositoryCourses.csproj",
-        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "E:\\C#\\RepositoryPattern\\C# Program\\RepositoryCourses\\obj\\",
+        "projectPath": "D:\\C#\\Week3\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj",
+        "packagesPath": "C:\\Users\\kamrdmuh\\.nuget\\packages\\",
+        "outputPath": "D:\\C#\\Week3\\Asp.netProject\\RepositoryCourses\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "D:\\sdk .net\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\kamrdmuh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.1, )"
