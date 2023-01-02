@@ -2,10 +2,11 @@
 
 namespace RepositoryCourses.Data_Access.DTOS.Authentications
 {
-    public class UserRegisterDTOS : UserLoginDTO
+    public class UserLoginDTO
     {
         [Required]
-        public string Name { get; set; }
-
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryCourses.Configurations;
@@ -7,6 +8,7 @@ using RepositoryCourses.Data_Access;
 using RepositoryCourses.Data_Access.Implementation;
 using RepositoryCourses.Domain.Repositories;
 using RepositoryCourses.Helper;
+using RepositoryCourses.Services.Authentication;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -20,7 +22,8 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(jwt =>{
+}).AddJwtBearer(jwt =>
+{
     var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfigurations:Secret").Value);
     jwt.SaveToken = true;
     jwt.TokenValidationParameters = new TokenValidationParameters()
@@ -28,14 +31,24 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = false, // for dev false other wise will check for ssl
-        ValidateAudience=false ,  // for dev only,
+        ValidateAudience = false,  // for dev only,
         RequireExpirationTime = false, // for dev i am putting it false
-        ValidateLifetime=true,
+        ValidateLifetime = true,
     };
 
 });
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.User.RequireUniqueEmail = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+
+})
+ .AddEntityFrameworkStores<CourseContext>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<ITeacherSertvice, TeacherService>();
+builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddMvc().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
