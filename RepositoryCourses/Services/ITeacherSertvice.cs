@@ -6,7 +6,7 @@ namespace RepositoryCourses.CourseServices
     {
         Task<IEnumerable<TeachersDTO>> GetAllTeachers();
         Task<TeachersDTO> GetById(int id);
-        Task Delete(int id);
+        Task<bool> Delete(int id);
         void Update(TeachersDTO teachersDTO);
         Task InsertAsync(TeachersDTO teachersDTO);
         Task<int> CompletedAsync();

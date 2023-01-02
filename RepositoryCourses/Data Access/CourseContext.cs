@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 using RepositoryCourses.Models;
 
 namespace RepositoryCourses.Data_Access
 {
-    public class CourseContext:DbContext
+    public class CourseContext:IdentityDbContext
     {
         public CourseContext(DbContextOptions<CourseContext> options)
             : base(options)

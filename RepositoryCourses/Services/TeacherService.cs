@@ -38,16 +38,9 @@ namespace RepositoryCourses.CourseServices
             return await _unitOfWork.Save();
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var teacher = await _unitOfWork.Teacher.Get(id);
-            if (teacher == null)
-            {
-                return;
-            }
-
-            _unitOfWork.Teacher.Remove(teacher);
-            await _unitOfWork.Save();
+           return await _unitOfWork.Teacher.Remove(id);
         }
 
         public void Update(TeachersDTO teachersDTO)

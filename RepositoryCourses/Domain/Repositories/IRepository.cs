@@ -9,7 +9,7 @@ namespace RepositoryCourses.Domain.Repositories
         Task<IEnumerable<T>> Find(Expression<Func<T,bool>> predicate);
         Task Add(T entity);
         Task AddRange(IEnumerable<T> entities);
-        void Remove(T entity);
+        Task<bool> Remove(int id);
         void RemoveRange(IEnumerable<T> entities);
         void Update(T entity);
         

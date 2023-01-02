@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RepositoryCourses.Data_Access;
 using RepositoryCourses.Domain.Repositories;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace RepositoryCourses.Domain.Implementation
@@ -40,9 +41,17 @@ namespace RepositoryCourses.Domain.Implementation
            return await _dbset.ToListAsync();
         }
 
-        public void Remove(T entity)
+        public async Task<bool> Remove(int id)
         {
-            _dbset.Remove(entity);
+            var t = await _dbset.FindAsync(id);
+
+            if (t != null)
+            {
+                _dbset.Remove(t);
+                return true;
+            }
+            else
+                return false;
         }
 
         public void RemoveRange(IEnumerable<T> entities)

@@ -62,12 +62,29 @@ namespace RepositoryCourses.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteTeacher(int id)
+        public async Task<IActionResult>  DeleteTeacher(int id)
         {
             try
             {
-                _teacherService.Delete(id);
-                return Ok(id);
+                var result= await _teacherService.Delete(id);
+                            await _teacherService.CompletedAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateTeacherProfile(TeachersDTO teachersDTO)
+        {
+            try
+            {
+                _teacherService.Update(teachersDTO);
+                var res=await _teacherService.CompletedAsync();
+                return Ok(res);
             }
             catch (Exception ex)
             {
