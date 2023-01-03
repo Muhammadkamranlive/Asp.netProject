@@ -344,3 +344,5 @@ D:\Project\Asp.netProject\RepositoryCourses\obj\Debug\net6.0\refint\RepositoryCo
 D:\Project\Asp.netProject\RepositoryCourses\obj\Debug\net6.0\RepositoryCourses.pdb
 D:\Project\Asp.netProject\RepositoryCourses\obj\Debug\net6.0\RepositoryCourses.genruntimeconfig.cache
 D:\Project\Asp.netProject\RepositoryCourses\obj\Debug\net6.0\ref\RepositoryCourses.dll
+E:\C#\final\Asp.netProject\RepositoryCourses\bin\Debug\net6.0\Autofac.dll
+E:\C#\final\Asp.netProject\RepositoryCourses\bin\Debug\net6.0\Autofac.Extensions.DependencyInjection.dll

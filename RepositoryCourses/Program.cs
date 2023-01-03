@@ -1,3 +1,5 @@
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +10,12 @@ using RepositoryCourses.Data_Access;
 using RepositoryCourses.Data_Access.Implementation;
 using RepositoryCourses.Domain.Repositories;
 using RepositoryCourses.Helper;
+using RepositoryCourses.Models;
+using RepositoryCourses.Services;
 using RepositoryCourses.Services.Authentication;
 using System.Text;
 using System.Text.Json.Serialization;
+using RepositoryCourses;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -47,8 +52,11 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 })
  .AddEntityFrameworkStores<CourseContext>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<ITeacherSertvice, TeacherService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<ITeacherSertvice, TeacherService>();
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+    containerBuilder.RegisterModule(new RepoModule()));
 builder.Services.AddMvc().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

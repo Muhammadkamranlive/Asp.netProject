@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryCourses.CourseServices;
 using RepositoryCourses.Data_Access.DTOS;
+using RepositoryCourses.Models;
 
 namespace RepositoryCourses.Controllers
 {
@@ -11,17 +13,19 @@ namespace RepositoryCourses.Controllers
     public class TeacherController : ControllerBase
     {
         public ITeacherSertvice _teacherService { get; set; }
-        public TeacherController(ITeacherSertvice teacherService)
+        private readonly IMapper _mapper;
+        public TeacherController(ITeacherSertvice teacherService,IMapper mapper)
         {
             _teacherService = teacherService;
+            _mapper = mapper;
         }
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             try
             {
-                var result = await _teacherService.GetAllTeachers();
+                var result = await _teacherService.GetAll();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -30,7 +34,7 @@ namespace RepositoryCourses.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -46,13 +50,14 @@ namespace RepositoryCourses.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> CreateTeacher(TeachersDTO teachersDTO)
         {
             try
             {
-                await _teacherService.InsertAsync(teachersDTO);
+               
+                await _teacherService.InsertAsync(_mapper.Map<Teachers>(teachersDTO));
                 await _teacherService.CompletedAsync();
                 return Ok(teachersDTO);
             }
@@ -62,7 +67,7 @@ namespace RepositoryCourses.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete]
         public async Task<IActionResult> DeleteTeacher(int id)
         {
@@ -84,7 +89,7 @@ namespace RepositoryCourses.Controllers
         {
             try
             {
-                _teacherService.Update(teachersDTO);
+                _teacherService.Update(_mapper.Map<Teachers>(teachersDTO));
                 var res = await _teacherService.CompletedAsync();
                 return Ok(res);
             }

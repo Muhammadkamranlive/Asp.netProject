@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj": {}
+    "E:\\C#\\final\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj": {}
   },
   "projects": {
-    "D:\\Project\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj": {
+    "E:\\C#\\final\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj",
+        "projectUniqueName": "E:\\C#\\final\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj",
         "projectName": "RepositoryCourses",
-        "projectPath": "D:\\Project\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj",
-        "packagesPath": "C:\\Users\\kamrdmuh\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\Asp.netProject\\RepositoryCourses\\obj\\",
+        "projectPath": "E:\\C#\\final\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj",
+        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
+        "outputPath": "E:\\C#\\final\\Asp.netProject\\RepositoryCourses\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\sdk .net\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\kamrdmuh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,6 +48,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

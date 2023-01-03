@@ -1,15 +1,12 @@
 ﻿using RepositoryCourses.Data_Access.DTOS;
+using RepositoryCourses.Models;
+using RepositoryCourses.Services;
 
 namespace RepositoryCourses.CourseServices
 {
-    public interface ITeacherSertvice
+    public interface ITeacherSertvice:IService<Teachers>
     {
-        Task<IEnumerable<TeachersDTO>> GetAllTeachers();
-        Task<TeachersDTO> GetById(int id);
-        Task<bool> Delete(int id);
-        void Update(TeachersDTO teachersDTO);
-        Task InsertAsync(TeachersDTO teachersDTO);
-        Task<int> CompletedAsync();
+      
 
 
 
