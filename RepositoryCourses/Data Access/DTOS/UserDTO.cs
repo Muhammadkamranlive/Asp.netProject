@@ -1,8 +1,10 @@
-﻿namespace RepositoryCourses.Data_Access.DTOS
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RepositoryCourses.Data_Access.DTOS
 {
     public class UserDTO
     {
-        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
     }
 }
