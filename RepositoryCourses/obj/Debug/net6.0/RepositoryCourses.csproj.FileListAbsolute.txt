@@ -347,3 +347,6 @@ D:\Project\Asp.netProject\RepositoryCourses\obj\Debug\net6.0\ref\RepositoryCours
 E:\C#\final\Asp.netProject\RepositoryCourses\bin\Debug\net6.0\Autofac.dll
 E:\C#\final\Asp.netProject\RepositoryCourses\bin\Debug\net6.0\Autofac.Extensions.DependencyInjection.dll
 E:\C#\final\Asp.netProject\RepositoryCourses\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Project\Asp.netProject\RepositoryCourses\bin\Debug\net6.0\Autofac.dll
+D:\Project\Asp.netProject\RepositoryCourses\bin\Debug\net6.0\Autofac.Extensions.DependencyInjection.dll
+D:\Project\Asp.netProject\RepositoryCourses\bin\Debug\net6.0\Newtonsoft.Json.dll

@@ -1,23 +1,22 @@
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using RepositoryCourses;
 using RepositoryCourses.Configurations;
 using RepositoryCourses.CourseServices;
 using RepositoryCourses.Data_Access;
 using RepositoryCourses.Data_Access.Implementation;
 using RepositoryCourses.Domain.Repositories;
 using RepositoryCourses.Helper;
-using RepositoryCourses.Models;
+using RepositoryCourses.Middlerware;
 using RepositoryCourses.Services;
 using RepositoryCourses.Services.Authentication;
 using System.Text;
 using System.Text.Json.Serialization;
-using RepositoryCourses;
-using Microsoft.AspNetCore.Diagnostics;
-using RepositoryCourses.Middlerware;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -57,9 +56,15 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITeacherSertvice, TeacherService>();
 builder.Services.AddTransient<IStudentService, StudentService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddSingleton<ICourseService, CourseService>();
+builder.Services.AddSingleton<ICoverService, CoverService>();
+builder.Services.AddSingleton<ITagService, TagService>();
+
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterModule(new RepoModule()));
+
 builder.Services.AddMvc().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -75,23 +80,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-    app.UseExceptionHandler(err =>
-    {
-        err.Run(async context =>
-        {
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            context.Response.ContentType = "application/json";
-            var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-            if(contextFeature != null)
-            {
-                await context.Response.WriteAsync(new GlobalErrorHandling
-                {
-                    StatusCode = context.Response.StatusCode,
-                    Message="Internal Server Error Please Try Again Later"
-                }.ToString());
-            }
-        });
-    });
+app.UseExceptionHandler(err =>
+   {
+       err.Run(async context =>
+       {
+           context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+           context.Response.ContentType = "application/json";
+           var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+           if (contextFeature != null)
+           {
+               await context.Response.WriteAsync(new GlobalErrorHandling
+               {
+                   StatusCode = context.Response.StatusCode,
+                   Message = "Internal Server Error Please Try Again Later"
+               }.ToString());
+           }
+       });
+   });
 app.UseHttpsRedirection();
 app.UseAuthentication();
 

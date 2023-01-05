@@ -2,7 +2,7 @@
 
 namespace RepositoryCourses.Domain.Repositories
 {
-    public interface ICoverRepository:IRepository<Cover>
+    public interface ICoverRepository:IGenericRepository<Cover>
     {
     }
 }

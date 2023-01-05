@@ -4,7 +4,7 @@ using RepositoryCourses.Models;
 
 namespace RepositoryCourses.Data_Access.Implementation
 {
-    public class CourseRepository : Repository<Course>, ICourseRespository
+    public class CourseRepository : GenericRepository<Course>, ICourseRespository
     {
         public CourseRepository(CourseContext context) : base(context)
         {

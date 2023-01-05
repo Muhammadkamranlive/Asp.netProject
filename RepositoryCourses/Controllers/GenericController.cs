@@ -1,18 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RepositoryCourses.CourseServices;
-using RepositoryCourses.Data_Access.DTOS;
-using RepositoryCourses.Models;
 using RepositoryCourses.Services;
 
 namespace RepositoryCourses.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GenericController<T,TDTO> : ControllerBase where T: class where TDTO : class
+    public class GenericController<T, TDTO> : ControllerBase where T : class where TDTO : class
 
     {
         public IGenericService<T> _IService { get; set; }
@@ -23,56 +19,74 @@ namespace RepositoryCourses.Controllers
             _IService = IService;
             _mapper = mapper;
         }
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            
-                var result = await _IService.GetAll();
 
-                return Ok(result);
-            
-          
+            var data = await _IService.GetAll();
+            var result = _mapper.Map<List<TDTO>>(data);
+            return Ok(result);
+
+
         }
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
-            
 
-                var result = await _IService.GetById(id);
-                return Ok(result);
-            
-           
-        }
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost]
-        public async Task<IActionResult> CreateTeacher(TDTO EntityDTO)
-        {
-           
 
-                await _IService.InsertAsync(_mapper.Map<T>(EntityDTO));
-                await _IService.CompletedAsync();
-                return Ok(EntityDTO);
-           
-        }
-        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpDelete]
-        public async Task<IActionResult> DeleteTeacher(int id)
-        {
-            
-                var result = await _IService.Delete(id);
-                await _IService.CompletedAsync();
-                return Ok(result);
+            var singleRecord = await _IService.GetById(id);
+            var result = _mapper.Map<TDTO>(singleRecord);
+            return Ok(result);
+
+
         }
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPut]
-        public async Task<IActionResult> UpdateTeacherProfile(TDTO EntityDTO)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost]
+        public async Task<IActionResult> Create(TDTO EntityDTO)
         {
-        
-                _IService.Update(_mapper.Map<T>(EntityDTO));
-                var res = await _IService.CompletedAsync();
-                return Ok(res);
+
+
+            await _IService.InsertAsync(_mapper.Map<T>(EntityDTO));
+            await _IService.CompletedAsync();
+            return Ok(EntityDTO);
+
+        }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var result = await _IService.Delete(id);
+            await _IService.CompletedAsync();
+            return Ok(result);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpPut]
+        public async Task<IActionResult> Update(TDTO EntityDTO)
+        {
+
+            _IService.Update(_mapper.Map<T>(EntityDTO));
+            var res = await _IService.CompletedAsync();
+            return Ok(res);
         }
     }
 }

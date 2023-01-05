@@ -9,11 +9,10 @@
             Students = new HashSet<StudentDTO>();
         }
         public int Id { get; set; }
-        public string? CourseTitle { get; set; }
-        public string? Description { get; set; }
-        public int? Level { get; set; }
+        public string CourseTitle { get; set; }
+        public string Description { get; set; }
+        public int Level { get; set; }
         public float? FullPrice { get; set; }
-        public int? AuthorId { get; set; }
         public virtual CategoryDTO? Category { get; set; }
         public virtual CoverDTO? Cover { get; set; }
         public virtual ICollection<TeachersDTO>? Teacher { get; set; }

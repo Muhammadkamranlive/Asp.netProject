@@ -8,14 +8,15 @@ namespace RepositoryCourses.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : GenericController<Student, StudentDTO>
+    public class CourseController : GenericController<Course, CourseDTO>
     {
-        private readonly IStudentService _studentService;
+        private readonly ICourseService _courseService;
         private readonly IMapper _mapper;
-        public StudentController(IStudentService studentService, IMapper mapper) : base(studentService, mapper)
+        public CourseController(ICourseService courseService, IMapper mapper) : base(courseService, mapper)
         {
-            _studentService = studentService;
+            _courseService = courseService;
             _mapper = mapper;
+
         }
     }
 }

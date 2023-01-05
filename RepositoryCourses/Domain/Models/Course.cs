@@ -1,4 +1,6 @@
-﻿namespace RepositoryCourses.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RepositoryCourses.Models
 {
     public class Course
     {
@@ -11,12 +13,22 @@
 
         public int Id { get; set; }
 
-        public string? CourseTitle { get; set; }
+        [Required(ErrorMessage = "Course Title is Required")]
+        [MinLength(5)]
+        [MaxLength(50)]
+        public string CourseTitle { get; set; }
 
-        public string? Description { get; set; }
-        public int? Level { get; set; }
-        public float? FullPrice { get; set; }
-        public int? AuthorId { get; set; }
+        [Required(ErrorMessage = "Course Description is Required")]
+        [MinLength(5)]
+        public string Description { get; set; }
+
+        [Required(ErrorMessage = "Please add course level")]
+        public int Level { get; set; }
+
+        [Required(ErrorMessage = "Please add course price")]
+        [Range(100, int.MaxValue, ErrorMessage = "Please enter a price bigger than {100}")]
+        public float FullPrice { get; set; }
+
         public virtual Category? Category { get; set; }
         public virtual Cover? Cover { get; set; }
         public virtual ICollection<Teachers>? Teacher { get; set; }

@@ -2,7 +2,7 @@
 
 namespace RepositoryCourses.Domain.Repositories
 {
-    public interface ITagsRepository:IRepository<Tag>
+    public interface ITagsRepository:IGenericRepository<Tag>
     {
     }
 }
