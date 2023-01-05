@@ -2,7 +2,7 @@
 
 namespace RepositoryCourses.Services
 {
-    public interface IService<T> where T:class
+    public interface IGenericService<T> where T:class
     {
 
         Task<IEnumerable<T>> GetAll();

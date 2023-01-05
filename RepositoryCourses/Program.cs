@@ -16,6 +16,8 @@ using RepositoryCourses.Services.Authentication;
 using System.Text;
 using System.Text.Json.Serialization;
 using RepositoryCourses;
+using Microsoft.AspNetCore.Diagnostics;
+using RepositoryCourses.Middlerware;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -73,7 +75,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+    app.UseExceptionHandler(err =>
+    {
+        err.Run(async context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Response.ContentType = "application/json";
+            var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+            if(contextFeature != null)
+            {
+                await context.Response.WriteAsync(new GlobalErrorHandling
+                {
+                    StatusCode = context.Response.StatusCode,
+                    Message="Internal Server Error Please Try Again Later"
+                }.ToString());
+            }
+        });
+    });
 app.UseHttpsRedirection();
 app.UseAuthentication();
 

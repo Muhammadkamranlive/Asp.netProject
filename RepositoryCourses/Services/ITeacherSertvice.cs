@@ -4,7 +4,7 @@ using RepositoryCourses.Services;
 
 namespace RepositoryCourses.CourseServices
 {
-    public interface ITeacherSertvice:IService<Teachers>
+    public interface ITeacherSertvice:IGenericService<Teachers>
     {
       
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8PEABnJ0k7JW1mdQT+6Ia40U4MrKyXDFstLp9INv/sQ7UaVM4QAaHOQ8o27xmgNnQxBonWU1Txf0QG7r6sAPOA==",
+  "dgSpecHash": "f2GPHmNZvHsloAhk8INQYymEIcgQvHn0/z08Jcokk6tKyS600ZalkDWDnqLR2l3ZnciUH3+2y54z1oOKuUhOHQ==",
   "success": true,
   "projectFilePath": "E:\\C#\\final\\Asp.netProject\\RepositoryCourses\\RepositoryCourses.csproj",
   "expectedPackageFiles": [
@@ -54,6 +54,7 @@
     "C:\\Users\\dell\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\dell\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

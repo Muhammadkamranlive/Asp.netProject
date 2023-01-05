@@ -2,7 +2,7 @@
 
 namespace RepositoryCourses.Services
 {
-    public interface IStudentService:IService<Student>
+    public interface IStudentService:IGenericService<Student>
     {
     }
 }

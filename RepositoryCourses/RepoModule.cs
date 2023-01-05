@@ -15,7 +15,7 @@ namespace RepositoryCourses
         {
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>))
                 .InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IService<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IGenericService<>)).InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
             
 

@@ -4,7 +4,7 @@ using RepositoryCourses.Domain.Repositories;
 
 namespace RepositoryCourses.Services
 {
-    public class GenericService<T> : IService<T> where T : class
+    public class GenericService<T> : IGenericService<T> where T : class
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<T> _repository;
