@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RepositoryCourses.Data_Access.DTOS;
 using RepositoryCourses.Models;
-using RepositoryCourses.Services;
+using RepositoryCourses.Services.Interfaces;
 
 namespace RepositoryCourses.Controllers
 {

@@ -1,20 +1,18 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryCourses;
 using RepositoryCourses.Configurations;
-using RepositoryCourses.CourseServices;
 using RepositoryCourses.Data_Access;
 using RepositoryCourses.Data_Access.Implementation;
 using RepositoryCourses.Domain.Repositories;
 using RepositoryCourses.Helper;
-using RepositoryCourses.Middlerware;
-using RepositoryCourses.Services;
 using RepositoryCourses.Services.Authentication;
+using RepositoryCourses.Services.Implementation;
+using RepositoryCourses.Services.Interfaces;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -80,23 +78,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseExceptionHandler(err =>
-   {
-       err.Run(async context =>
-       {
-           context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-           context.Response.ContentType = "application/json";
-           var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-           if (contextFeature != null)
-           {
-               await context.Response.WriteAsync(new GlobalErrorHandling
-               {
-                   StatusCode = context.Response.StatusCode,
-                   Message = "Internal Server Error Please Try Again Later"
-               }.ToString());
-           }
-       });
-   });
+// middleware
+
+app.ConfigureErrorHandler();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 

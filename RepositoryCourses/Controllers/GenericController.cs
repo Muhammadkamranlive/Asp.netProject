@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RepositoryCourses.Services;
+using RepositoryCourses.Services.Interfaces;
 
 namespace RepositoryCourses.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GenericController<T, TDTO> : ControllerBase where T : class where TDTO : class
+    public class GenericController<T, DTOENTITY> : ControllerBase where T : class where DTOENTITY : class
 
     {
         public IGenericService<T> _IService { get; set; }
@@ -20,42 +20,33 @@ namespace RepositoryCourses.Controllers
             _mapper = mapper;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
 
             var data = await _IService.GetAll();
-            var result = _mapper.Map<List<TDTO>>(data);
+            var result = _mapper.Map<List<DTOENTITY>>(data);
             return Ok(result);
 
 
         }
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
 
 
             var singleRecord = await _IService.GetById(id);
-            var result = _mapper.Map<TDTO>(singleRecord);
+            var result = _mapper.Map<DTOENTITY>(singleRecord);
             return Ok(result);
 
 
         }
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
-        public async Task<IActionResult> Create(TDTO EntityDTO)
+        public async Task<IActionResult> Create(DTOENTITY EntityDTO)
         {
 
 
@@ -65,9 +56,6 @@ namespace RepositoryCourses.Controllers
 
         }
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -78,10 +66,8 @@ namespace RepositoryCourses.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
-        public async Task<IActionResult> Update(TDTO EntityDTO)
+        public async Task<IActionResult> Update(DTOENTITY EntityDTO)
         {
 
             _IService.Update(_mapper.Map<T>(EntityDTO));

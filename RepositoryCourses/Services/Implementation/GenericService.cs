@@ -1,6 +1,7 @@
 ﻿using RepositoryCourses.Domain.Repositories;
+using RepositoryCourses.Services.Interfaces;
 
-namespace RepositoryCourses.Services
+namespace RepositoryCourses.Services.Implementation
 {
     public class GenericService<T> : IGenericService<T> where T : class
     {
@@ -20,8 +21,13 @@ namespace RepositoryCourses.Services
 
         public async Task<bool> Delete(int id)
         {
-            await _repository.Remove(id);
-            return true;
+            var record = await _repository.Get(id);
+            if (record != null)
+            {
+                await _repository.Remove(id);
+            }
+
+            throw new Exception($"{typeof(T).Name} ({id}) not found"); ;
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -43,7 +49,7 @@ namespace RepositoryCourses.Services
         public async Task InsertAsync(T entity)
         {
             await _repository.Add(entity);
-            await _unitOfWork.Save();
+
         }
 
         public void Update(T entity)

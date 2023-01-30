@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace RepositoryCourses.Models
+﻿namespace RepositoryCourses.Models
 {
     public class Course
     {
@@ -12,21 +10,12 @@ namespace RepositoryCourses.Models
         }
 
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Course Title is Required")]
-        [MinLength(5)]
-        [MaxLength(50)]
         public string CourseTitle { get; set; }
 
-        [Required(ErrorMessage = "Course Description is Required")]
-        [MinLength(5)]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Please add course level")]
         public int Level { get; set; }
 
-        [Required(ErrorMessage = "Please add course price")]
-        [Range(100, int.MaxValue, ErrorMessage = "Please enter a price bigger than {100}")]
         public float FullPrice { get; set; }
 
         public virtual Category? Category { get; set; }

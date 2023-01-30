@@ -1,8 +1,8 @@
 ﻿using RepositoryCourses.Domain.Repositories;
 using RepositoryCourses.Models;
-using RepositoryCourses.Services;
+using RepositoryCourses.Services.Interfaces;
 
-namespace RepositoryCourses.CourseServices
+namespace RepositoryCourses.Services.Implementation
 {
     public class TeacherService : GenericService<Teachers>, ITeacherSertvice
     {

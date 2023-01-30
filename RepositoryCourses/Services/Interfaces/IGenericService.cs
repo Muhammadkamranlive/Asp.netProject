@@ -1,8 +1,6 @@
-﻿using RepositoryCourses.Data_Access.DTOS;
-
-namespace RepositoryCourses.Services
+﻿namespace RepositoryCourses.Services.Interfaces
 {
-    public interface IGenericService<T> where T:class
+    public interface IGenericService<T> where T : class
     {
 
         Task<IEnumerable<T>> GetAll();

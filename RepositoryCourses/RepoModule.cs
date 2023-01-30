@@ -1,15 +1,13 @@
 ﻿using Autofac;
-using Microsoft.IdentityModel.Tokens;
 using RepositoryCourses.Data_Access.Implementation;
-using RepositoryCourses.Domain.Repositories;
-using RepositoryCourses.Services;
-using System.Reflection;
-using System;
 using RepositoryCourses.Domain.Implementation;
+using RepositoryCourses.Domain.Repositories;
+using RepositoryCourses.Services.Implementation;
+using RepositoryCourses.Services.Interfaces;
 
 namespace RepositoryCourses
 {
-    public class RepoModule:Autofac.Module
+    public class RepoModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -17,9 +15,9 @@ namespace RepositoryCourses
                 .InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IGenericService<>)).InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-            
 
-           }
+
+        }
 
     }
 }
